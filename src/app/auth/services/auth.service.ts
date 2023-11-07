@@ -22,7 +22,7 @@ export class AuthService {
       .post<any>(`${this.endpoint}/user/token/`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.access);
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/dashboard']);
         
       });
   }

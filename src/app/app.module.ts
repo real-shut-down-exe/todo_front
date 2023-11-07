@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
 import { ConfigService } from './auth/services/config.service';
+import { StartPageComponent } from './start-page/start-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 export function appConfigInit(configService: ConfigService) {
   return () => { return configService.load() }
@@ -14,12 +17,15 @@ export function appConfigInit(configService: ConfigService) {
 @NgModule({
   declarations: [
     AppComponent,
+    StartPageComponent,
+    DashboardComponent,
   ],
   imports: [
     AuthModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
   ],
   providers: [
     ConfigService,
