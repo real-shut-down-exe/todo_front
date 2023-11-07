@@ -25,4 +25,12 @@ export class DashboardComponent {
       console.log(this.todos)
     });
   }
+
+  toggle = {
+    is_deleted: false
+  };
+
+  toggleIsDeleted(toggle: { is_deleted: boolean; }) {
+    toggle.is_deleted = !toggle.is_deleted;
+  }
 }
