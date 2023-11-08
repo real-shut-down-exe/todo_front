@@ -13,15 +13,17 @@
                         <div class="pb-2">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <input type="text" class="form-control form-control-lg"
-                                            id="exampleFormControlInput1" placeholder="Add new...">
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                                                class="fas fa-calendar-alt fa-lg me-3"></i></a>
-                                        <div>
-                                            <button type="button" class="btn btn-primary">Add</button>
-                                        </div>
-                                    </div>
+                                        <form class="d-flex flex-row align-items-center" [formGroup]="postTodoForm">
+                                            <input type="text" class="form-control form-control-lg"
+                                                id="exampleFormControlInput1" placeholder="Add new..."
+                                                formControlName="title">
+                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
+                                                    class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                                            <div>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="postNewTodo(postTodoForm)">Add</button>
+                                            </div>
+                                        </form>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +49,7 @@
 
 
 
-<!-- eef -->
+                        <!-- eef -->
                         <div>
                             <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
                                 <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
@@ -62,8 +64,9 @@
                                     </p>
                                 </li>
 
-                                <li class="d-flex justify-content-center align-items-center" style="margin-right: 4rem;">
-                                    
+                                <li class="d-flex justify-content-center align-items-center"
+                                    style="margin-right: 4rem;">
+
                                 </li>
 
                             </ul>
@@ -102,8 +105,9 @@
                                         <fa-icon [icon]="faTrash" class="iconMargin">Delete</fa-icon>
                                     </ul>
                                     <ul class="p-0">
-                                        <fa-icon [icon]="faPen" class="iconMargin" (click)="deleteTodo(todo.id)">Delete</fa-icon>
-                                        
+                                        <fa-icon [icon]="faPen" class="iconMargin"
+                                            (click)="deleteTodo(todo.id)">Delete</fa-icon>
+
                                     </ul>
                                 </li>
 

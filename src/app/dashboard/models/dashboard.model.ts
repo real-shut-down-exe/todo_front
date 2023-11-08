@@ -5,5 +5,8 @@ export interface Todos{
     created_at: Date
     is_deleted: boolean
     status: string
+}
 
+export interface AddTodo{
+    title: string
 }

@@ -10,6 +10,7 @@ import { StartPageComponent } from './start-page/start-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function appConfigInit(configService: ConfigService) {
   return () => { return configService.load() }
@@ -28,6 +29,7 @@ export function appConfigInit(configService: ConfigService) {
     NgbModule,
     HttpClientModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   providers: [
     ConfigService,

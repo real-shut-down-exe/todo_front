@@ -1,22 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http-service.service';
 import { Router } from '@angular/router';
 import { Todos } from './models/dashboard.model';
 import { faTrash, faPen} from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
   endpoint: string = 'http://127.0.0.1:8000/api';
   faTrash = faTrash
   faPen = faPen
+  postTodoForm: FormGroup
 
-  constructor(private httpService: HttpService, private router: Router) { }
+  constructor(private httpService: HttpService, private router: Router,private fb: FormBuilder) {
+    this.postTodoForm = this.fb.group({
+      title: ['',Validators.required],
+    })
+  }
   todos: Todos[] = [];
 
   ngOnInit() {
@@ -49,5 +55,18 @@ export class DashboardComponent {
       this.fetchData();
     });
   }
+
+  postNewTodo(data: any){
+    return this.httpService.post(this.postTodoForm.value).subscribe( data =>{
+      this.fetchData();
+      })
+  }
+
+
+  // postData(){
+  //   this.httpService.post(thsi.angForm.value).subscribe(data=>
+       
+  //   )
+  // }
   
 }
