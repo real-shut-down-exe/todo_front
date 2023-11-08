@@ -1,7 +1,7 @@
 export interface Todos{
-    _id: String
-    title: String
-    description: String
+    id: number
+    title: string
+    description: string
     created_at: Date
     is_deleted: boolean
     status: string

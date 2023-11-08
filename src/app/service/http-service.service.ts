@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Todos } from '../dashboard/models/dashboard.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-
+  
+  endpoint: string = 'http://127.0.0.1:8000/api';
   constructor(private http: HttpClient) { }
 
   // Genel HTTP GET isteği
@@ -25,7 +27,7 @@ export class HttpService {
   }
 
   // Genel HTTP DELETE isteği
-  delete<T>(url: string): Observable<T> {
-    return this.http.delete<T>(url);
+  delete(id: number) {
+    return this.http.delete<Todos>(this.endpoint + "/todo/" + id + "/");
   }
 }

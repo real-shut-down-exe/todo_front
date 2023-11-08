@@ -45,38 +45,73 @@
                                     class="fas fa-sort-amount-down-alt ms-2"></i></a>
                         </div>
 
-                        <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
-                            <li class="list-group-item d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                                <p class="lead fw-bold mb-0 text-nowrap text-success ">Jop</p>
-                            </li>
-                            <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                                <p href="#!" class="lead fw-bold text-success" title="Created date">
-                                    Created Date
-                                </p>
-                            </li>
-                        </ul>
-
-                        <ul class="list-group list-group-horizontal rounded-0 bg-transparent"
-                            *ngFor="let todo of todos;">
-                            <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
-                                style="background-color: #f4f6f7;">
-                                <input class="form-check-input me-2" type="checkbox" [checked]="todo.is_deleted"
-                                    value="" aria-label="..." (click)="toggleIsDeleted(todo)" />
-                                <ng-container *ngIf="todo.is_deleted; else notDeleted">
-                                    <s class="lead fw-bold text-secondary">{{todo.title}}</s>
-                                </ng-container>
-                                <ng-template #notDeleted>
-                                    <p class="lead fw-bold text-secondary m-0">{{todo.title}}</p>
-                                </ng-template>
-                            </li>
 
 
-                            <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                                <a href="#!" class="nav-link" title="Created date">
-                                    {{todo.created_at| date: 'yyyy-MM-dd HH:mm' }}
-                                </a>
-                            </li>
-                        </ul>
+<!-- eef -->
+                        <div>
+                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                                <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
+                                    style="background-color: #f4f6f7;">
+                                    <p class="lead fw-bold mb-0 text-nowrap text-success ">Job</p>
+                                </li>
+
+
+                                <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent ">
+                                    <p href="#!" class="lead fw-bold text-success" title="Created date">
+                                        Created Date
+                                    </p>
+                                </li>
+
+                                <li class="d-flex justify-content-center align-items-center" style="margin-right: 4rem;">
+                                    
+                                </li>
+
+                            </ul>
+
+                            <hr class="m-0">
+                        </div>
+
+
+
+
+
+
+                        <div *ngFor="let todo of todos;">
+                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                                <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
+                                    style="background-color: #f4f6f7;">
+                                    <input class="form-check-input me-2" type="checkbox" [checked]="todo.is_deleted"
+                                        value="" aria-label="..." (click)="toggleIsDeleted(todo)" />
+                                    <ng-container *ngIf="todo.is_deleted; else notDeleted">
+                                        <s class="lead fw-bold text-secondary" title="Job">{{todo.title}}</s>
+                                    </ng-container>
+                                    <ng-template #notDeleted>
+                                        <p class="lead fw-bold text-secondary m-0">{{todo.title}}</p>
+                                    </ng-template>
+                                </li>
+
+
+                                <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent ">
+                                    <p href="#!" class="lead fw-bold text-secondary" title="Created date">
+                                        {{todo.created_at| date: 'yyyy-MM-dd HH:mm' }}
+                                    </p>
+                                </li>
+
+                                <li class="d-flex justify-content-center align-items-center">
+                                    <ul class="p-0">
+                                        <fa-icon [icon]="faTrash" class="iconMargin">Delete</fa-icon>
+                                    </ul>
+                                    <ul class="p-0">
+                                        <fa-icon [icon]="faPen" class="iconMargin" (click)="deleteTodo(todo.id)">Delete</fa-icon>
+                                        
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                            <hr class="m-0">
+                        </div>
+
                     </div>
                 </div>
             </div>
