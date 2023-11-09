@@ -23,9 +23,8 @@ export class HttpService {
   }
 
   // Genel HTTP PUT isteği
-  put(data: any){
-    const a = (this.endpoint+"/todo/",data)
-    return this.http.put<AddTodo>(this.endpoint+"/todo/",data)
+  put(id:number, data: any){
+    return this.http.put<AddTodo>(this.endpoint+"/todo/"+id+"/",data)
   }
 
   // Genel HTTP DELETE isteği

@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit{
     this.fetchData()
   }
 
-  fetchData() {
+  fetchData(){
     this.httpService.get<any>(`${this.endpoint}/todo/`)
     .subscribe(data => {
       this.todos = data;
@@ -83,6 +83,16 @@ export class DashboardComponent implements OnInit{
       centered: true,
     });
     modalRef.componentInstance.modalId = id;
+    modalRef.closed.subscribe({
+      next: (result) => {
+        console.log('Modal closed with result:', result);
+        this.fetchData();
+      },
+      error: (reason) => {
+        console.log('Modal dismissed with reason:', reason);
+      }
+    });
+    
   }
   
 }
