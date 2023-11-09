@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit{
   faPen = faPen
   postTodoForm: FormGroup
   toggleTodoForm: FormGroup
+  selectedOption: string = "1";
 
   constructor(
     private httpService: HttpService, 
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit{
     this.toggleTodoForm = this.fb.group({})
   }
   todos: Todos[] = [];
+  orjinalTodoList: Todos[] = [];
 
   ngOnInit() {
     this.fetchData()
@@ -43,6 +45,7 @@ export class DashboardComponent implements OnInit{
     this.httpService.get<any>(`${this.endpoint}/todo/`)
     .subscribe(data => {
       this.todos = data;
+      this.orjinalTodoList = data;
       console.log(this.todos)
     });
   }
@@ -59,6 +62,22 @@ export class DashboardComponent implements OnInit{
 
     this.httpService.put(toggleData.id,todo).subscribe(i=>{
     })
+  }
+  
+  test(event: Event){
+    console.log(this.selectedOption)
+    if(this.selectedOption === '1'){
+      this.fetchData();
+      this.todos = this.orjinalTodoList;
+    }
+    if(this.selectedOption === '2'){
+      this.todos = this.orjinalTodoList;
+      this.todos = this.todos.filter(todo => todo.is_deleted);
+    }
+    if(this.selectedOption === '3'){
+      this.todos = this.orjinalTodoList;
+      this.todos = this.todos.filter(todo => !todo.is_deleted);
+    }
   }
 
   deleteTodo(id: any){
