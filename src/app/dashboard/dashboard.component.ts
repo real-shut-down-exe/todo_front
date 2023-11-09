@@ -95,8 +95,32 @@ export class DashboardComponent implements OnInit{
       error: (reason) => {
         console.log('Modal dismissed with reason:', reason);
       }
-    });
-    
+    });    
+  }
+  searchJobTerm: string = '';
+  searchDateTerm: string = '';
+
+  get filteredTodos(): Todos[] {
+    return this.todos.filter(todo =>
+      (todo.title.toLowerCase().includes(this.searchJobTerm.toLowerCase()) || !this.searchJobTerm) &&
+      (this.searchDateTerm ? this.isValidDateTime(todo.created_at, this.searchDateTerm) : true)
+    );
   }
   
+  isValidDateTime(date: any, searchTerm: string): boolean {
+
+    date = new Date(date).toLocaleString('tr', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    (date.toLowerCase().includes(this.searchDateTerm.toLowerCase()) || !this.searchJobTerm)
+  
+    const dateString = date
+    return dateString.includes(searchTerm) || dateString.includes(`T${searchTerm}`);
+  }
+
 }

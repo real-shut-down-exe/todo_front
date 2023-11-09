@@ -10,7 +10,7 @@ import { StartPageComponent } from './start-page/start-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditModalComponent } from './dashboard/components/edit-modal/edit-modal.component';
 
 export function appConfigInit(configService: ConfigService) {
@@ -32,6 +32,7 @@ export function appConfigInit(configService: ConfigService) {
     HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     ConfigService,

@@ -71,7 +71,16 @@
 
                             </ul>
 
-                            <hr class="m-0">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-9">
+                                <input [(ngModel)]="searchJobTerm" class="form-control" placeholder="Job Search...">
+                            </div>
+                            <div class="col-3">
+                                <input [(ngModel)]="searchDateTerm" class="form-control" placeholder="Date Search...">
+                            </div>
+                            
                         </div>
 
 
@@ -79,7 +88,7 @@
 
 
 
-                        <div *ngFor="let todo of todos;" [formGroup]="toggleTodoForm">
+                        <div *ngFor="let todo of filteredTodos" [formGroup]="toggleTodoForm">
                             <ul class="list-group list-group-horizontal rounded-0 bg-transparent" [formGroup]="toggleTodoForm">
                                 <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
                                     style="background-color: #f4f6f7;">
