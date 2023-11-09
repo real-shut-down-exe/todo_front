@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit{
   faTrash = faTrash
   faPen = faPen
   postTodoForm: FormGroup
+  toggleTodoForm: FormGroup
 
   constructor(
     private httpService: HttpService, 
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit{
     this.postTodoForm = this.fb.group({
       title: ['',Validators.required],
     })
+    this.toggleTodoForm = this.fb.group({})
   }
   todos: Todos[] = [];
 
@@ -54,7 +56,9 @@ export class DashboardComponent implements OnInit{
       id: todo.id,
     };
     todo.is_deleted = !todo.is_deleted;
-    console.log(todo)
+
+    this.httpService.put(toggleData.id,todo).subscribe(i=>{
+    })
   }
 
   deleteTodo(id: any){

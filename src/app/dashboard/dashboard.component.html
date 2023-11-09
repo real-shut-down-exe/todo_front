@@ -79,12 +79,14 @@
 
 
 
-                        <div *ngFor="let todo of todos;">
-                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+                        <div *ngFor="let todo of todos;" [formGroup]="toggleTodoForm">
+                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" [formGroup]="toggleTodoForm">
                                 <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
                                     style="background-color: #f4f6f7;">
+                                    
                                     <input class="form-check-input me-2" type="checkbox" [checked]="todo.is_deleted"
-                                        value="" aria-label="..." (click)="toggleIsDeleted(todo)" />
+                                        aria-label="..." (click)="toggleIsDeleted(todo)"/>
+
                                     <ng-container *ngIf="todo.is_deleted; else notDeleted">
                                         <s class="lead fw-bold text-secondary" title="Job">{{todo.title}}</s>
                                     </ng-container>
