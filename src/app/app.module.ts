@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditModalComponent } from './dashboard/components/edit-modal/edit-modal.component';
 
 export function appConfigInit(configService: ConfigService) {
   return () => { return configService.load() }
@@ -21,6 +22,7 @@ export function appConfigInit(configService: ConfigService) {
     AppComponent,
     StartPageComponent,
     DashboardComponent,
+    EditModalComponent,
   ],
   imports: [
     AuthModule,

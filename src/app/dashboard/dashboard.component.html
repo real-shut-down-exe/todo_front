@@ -89,7 +89,7 @@
                                         <s class="lead fw-bold text-secondary" title="Job">{{todo.title}}</s>
                                     </ng-container>
                                     <ng-template #notDeleted>
-                                        <p class="lead fw-bold text-secondary m-0">{{todo.title}}</p>
+                                        <p class="lead fw-bold text-secondary m-0 w-900px">{{todo.title}}</p>
                                     </ng-template>
                                 </li>
 
@@ -102,11 +102,10 @@
 
                                 <li class="d-flex justify-content-center align-items-center">
                                     <ul class="p-0">
-                                        <fa-icon [icon]="faTrash" class="iconMargin">Delete</fa-icon>
+                                        <fa-icon [icon]="faTrash" class="iconMargin" (click)="deleteTodo(todo.id)">delete</fa-icon>
                                     </ul>
                                     <ul class="p-0">
-                                        <fa-icon [icon]="faPen" class="iconMargin"
-                                            (click)="deleteTodo(todo.id)">Delete</fa-icon>
+                                        <fa-icon [icon]="faPen" class="iconMargin" (click)="openEditModal(todo.id)">edit</fa-icon>
 
                                     </ul>
                                 </li>

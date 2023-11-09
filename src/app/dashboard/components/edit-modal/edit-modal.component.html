@@ -1,0 +1,26 @@
+<div class="p-5">
+    <div class="card border-0">
+        <div class="card-body">
+            <span class="col-12">
+                <div class="d-flex flex-row">
+                    <div class="col">
+                        <p class="display-6">Edit</p>
+                    </div>
+                    <div class="col-11">
+                        <p>({{editTodoForm.value.title}})</p>
+                    </div>
+                </div>
+            </span>
+            <form class="d-flex flex-row align-items-center" [formGroup]="editTodoForm">
+                <textarea type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                    placeholder="Add new..." formControlName="title">
+                </textarea>
+                <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
+                        class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                <div>
+                    <button type="button" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

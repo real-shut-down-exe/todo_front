@@ -20,3 +20,13 @@
 .mr-30{
   margin-right: 60px;
 }
+
+.w-900px{
+  max-width: 900px;
+}
+
+@media screen and (max-width: 1400px) {
+  .w-900px{
+    max-width: 100px;
+  }
+}

@@ -17,23 +17,23 @@ export class HttpService {
   }
 
   // Genel HTTP POST isteği
-  // post<T>(url: string, body: any, headers?: HttpHeaders): Observable<T> {
-  //   return this.http.post<T>(url, body, { headers });
-  // }
-
   post(data: any){
     const a = (this.endpoint+"/todo/",data)
     return this.http.post<AddTodo>(this.endpoint+"/todo/",data)
   }
 
-
   // Genel HTTP PUT isteği
-  put<T>(url: string, body: any, headers?: HttpHeaders): Observable<T> {
-    return this.http.put<T>(url, body, { headers });
+  put(data: any){
+    const a = (this.endpoint+"/todo/",data)
+    return this.http.put<AddTodo>(this.endpoint+"/todo/",data)
   }
 
   // Genel HTTP DELETE isteği
   delete(id: number) {
     return this.http.delete<Todos>(this.endpoint + "/todo/" + id + "/");
+  }
+
+  singelget(id: number){
+    return this.http.get<Todos>(this.endpoint + "/todo/" + id + "/");
   }
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Todos } from './models/dashboard.model';
 import { faTrash, faPen} from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditModalComponent } from './components/edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +20,13 @@ export class DashboardComponent implements OnInit{
   faPen = faPen
   postTodoForm: FormGroup
 
-  constructor(private httpService: HttpService, private router: Router,private fb: FormBuilder) {
+  constructor(
+    private httpService: HttpService, 
+    private router: Router,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private modalService: NgbModal
+    ) {
     this.postTodoForm = this.fb.group({
       title: ['',Validators.required],
     })
@@ -62,11 +70,19 @@ export class DashboardComponent implements OnInit{
       })
   }
 
-
-  // postData(){
-  //   this.httpService.post(thsi.angForm.value).subscribe(data=>
-       
-  //   )
+  // getActivatedTodoId(){
+  //   this.activatedRoute.paramMap.subscribe(todo =>{
+  //     const id = todo.get('id');
+  //     console.log(id);
+  //   })
   // }
+
+  openEditModal(id: number){
+    const modalRef = this.modalService.open(EditModalComponent, {
+      size: 'lg', // Size and other options can be set here as well
+      centered: true,
+    });
+    modalRef.componentInstance.modalId = id;
+  }
   
 }
