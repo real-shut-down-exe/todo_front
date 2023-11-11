@@ -45,7 +45,6 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit() {
     this.fetchData()
-    this.loginUser()
   }
 
   fetchData(){
@@ -151,13 +150,5 @@ export class DashboardComponent implements OnInit{
   
     const dateString = date
     return dateString.includes(searchTerm) || dateString.includes(`T${searchTerm}`);
-  }
-
-  otherUserId: string = ""
-  loginUser() {
-    this.httpService.findUserByMail(this.otherUserMail.value).subscribe(
-      (response: User) => {
-        this.otherUserId = response.pk
-    });
   }
 }
