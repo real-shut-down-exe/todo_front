@@ -22,6 +22,7 @@ export class EditModalComponent {
   ) {
     this.editTodoForm = this.fb.group({
       title: ['',Validators.required],
+      created_by: [localStorage.getItem("pk")]
     })
   }
   

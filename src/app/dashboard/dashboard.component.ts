@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Todos } from './models/dashboard.model';
+import { Todos, AddTodo } from './models/dashboard.model';
 import { faTrash, faPen} from '@fortawesome/free-solid-svg-icons';
 import { Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit{
     ) {
     this.postTodoForm = this.fb.group({
       title: ['',Validators.required],
+      created_by: [localStorage.getItem("pk")]
     })
     this.toggleTodoForm = this.fb.group({})
   }
@@ -42,25 +43,29 @@ export class DashboardComponent implements OnInit{
   }
 
   fetchData(){
-    this.httpService.get<any>(`${this.endpoint}/todo/`)
-    .subscribe(data => {
-      this.todos = data;
-      this.orjinalTodoList = data;
-      console.log(this.todos)
-    });
+    const created_by = localStorage.getItem("pk")
+    const id = created_by ? parseInt(created_by, 10) : 0;
+    console.log()
+    this.httpService.getAllTodosById(id).subscribe(
+      data =>{
+        this.todos = data;
+        this.orjinalTodoList = data;
+      });
   }
 
   toggle = {
     is_deleted: false
   };
 
-  toggleIsDeleted(todo: Todos) {
+  toggleIsDeleted(todo: AddTodo) {
+    const created_by = localStorage.getItem("pk") ?? "";
     const toggleData = {
-      id: todo.id,
+      pk: todo.pk,
     };
     todo.is_deleted = !todo.is_deleted;
+    todo.created_by = created_by
 
-    this.httpService.put(toggleData.id,todo).subscribe(i=>{
+    this.httpService.put(toggleData.pk,todo).subscribe(i=>{
     })
   }
   

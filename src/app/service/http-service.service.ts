@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AddTodo, Todos } from '../dashboard/models/dashboard.model';
+import { Todos, AddTodo  } from '../dashboard/models/dashboard.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class HttpService {
   
@@ -34,5 +34,10 @@ export class HttpService {
 
   singelget(id: number){
     return this.http.get<Todos>(this.endpoint + "/todo/" + id + "/");
+  }
+
+  getAllTodosById(createdBy: number): Observable<any> {
+    const requestData = { created_by: createdBy };
+    return this.http.post(`${this.endpoint}/todo/get_all_todo_by_id/`, requestData);
   }
 }
