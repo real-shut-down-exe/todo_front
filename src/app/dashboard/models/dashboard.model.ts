@@ -8,5 +8,6 @@ export interface Todos{
 }
 
 export interface AddTodo{
+    id: number
     title: string
 }

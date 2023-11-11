@@ -10,20 +10,18 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   endpoint: string = 'http://127.0.0.1:8000/api';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
-
   constructor(private http: HttpClient, private router: Router) { }
 
   // Sign-in
   signIn(user: User) {
-    console.log(`${this.endpoint}/user/token/`)
     return this.http
-      .post<any>(`${this.endpoint}/user/token/`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.access);
+      .post<any>(`${this.endpoint}/user/login/`, user,)
+      .subscribe(res  => {
         this.router.navigate(['/dashboard']);
-        
       });
+  }
+
+  signUp(user: User) {
+    console.log(`${this.endpoint}/user/token/`)
   }
 }

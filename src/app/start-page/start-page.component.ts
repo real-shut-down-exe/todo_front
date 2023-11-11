@@ -12,4 +12,8 @@ export class StartPageComponent {
   navigateToSignIn() {
     this.router.navigate(['signin']);
   }
+
+  navigateToSignup() {
+    this.router.navigate(['signup']);
+  }
 }

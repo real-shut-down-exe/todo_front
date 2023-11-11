@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent {
   
-  hide = true;
   signinForm: FormGroup;
 
   constructor(
@@ -19,7 +18,7 @@ export class SigninComponent {
     public router: Router
   ) {
     this.signinForm = this.fb.group({
-      email: ['emre@emre.com'],
+      mail: ['emre.admin.app.com'],
       password: ['123']
     });
   }
