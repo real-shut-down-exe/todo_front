@@ -41,4 +41,8 @@ export class HttpService {
     const requestData = { created_by: createdBy };
     return this.http.post(`${this.endpoint}/todo/get_all_todo_by_id/`, requestData);
   }
+
+  sendARequest(data: any){
+    return this.http.post<AddTodo>(this.endpoint+"/connectionRequest/sendARequest/",data)
+  }
 }

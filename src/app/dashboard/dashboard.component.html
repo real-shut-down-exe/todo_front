@@ -10,10 +10,10 @@
                         <a class="nav-link" href="#">Followed Todo</a>
                     </li>
                 </ul>
-                <div class="row mb-3 px-3">
+                <div class="row mb-3 px-3" [formGroup]="sendRequestForm">
                     <label class="col-sm-1 col-form-label">Follow Mail</label>
-                    <input type="text" class="col form-control">
-                    <button class="col-sm-1 ms-3 btn btn-primary">Follow</button>
+                    <input type="text" class="col form-control" formControlName="sender">
+                    <button class="col-sm-1 ms-3 btn btn-primary" (click)="sendRequest(sendRequestForm)">Follow</button>
                 </div>
 
                 <div class="card mb-5" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">

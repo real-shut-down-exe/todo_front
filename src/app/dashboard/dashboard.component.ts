@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit{
   postTodoForm: FormGroup
   toggleTodoForm: FormGroup
   otherUserMail: FormGroup
+  sendRequestForm: FormGroup
   selectedOption: string = "1";
 
   constructor(
@@ -39,6 +40,10 @@ export class DashboardComponent implements OnInit{
       mail: ['emre@emre.com'],
     })
     this.toggleTodoForm = this.fb.group({})
+    this.sendRequestForm = this.fb.group({
+      sender: ['',Validators.required],
+      receiver: [localStorage.getItem("mail")]
+    })
   }
   todos: Todos[] = [];
   orjinalTodoList: Todos[] = [];
@@ -150,5 +155,11 @@ export class DashboardComponent implements OnInit{
   
     const dateString = date
     return dateString.includes(searchTerm) || dateString.includes(`T${searchTerm}`);
+  }
+
+  sendRequest(data: any){
+    return this.httpService.sendARequest(this.sendRequestForm.value).subscribe( data =>{
+        console.log(data)
+      })
   }
 }
