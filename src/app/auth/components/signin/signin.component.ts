@@ -18,7 +18,7 @@ export class SigninComponent {
     public router: Router
   ) {
     this.signinForm = this.fb.group({
-      mail: ['emre.admin.app.com'],
+      mail: ['emre@emre.com'],
       password: ['123']
     });
   }

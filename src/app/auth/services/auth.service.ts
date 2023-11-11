@@ -22,6 +22,10 @@ export class AuthService {
   }
 
   signUp(user: User) {
-    console.log(`${this.endpoint}/user/token/`)
+    return this.http
+      .post(`${this.endpoint}/user/signup/`, user,)
+      .subscribe(res  => {
+        this.router.navigate(['/dashboard']);
+      });
   }
 }

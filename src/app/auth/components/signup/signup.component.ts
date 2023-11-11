@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -17,8 +17,8 @@ export class SignupComponent {
     public router: Router
   ) {
     this.signupForm = this.fb.group({
-      email: [''],
-      password: ['']
+      mail: ['',Validators.required],
+      password: ['',Validators.required],
     });
   }
 
