@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditModalComponent } from './components/edit-modal/edit-modal.component';
+import { User } from '../auth/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit{
   faPen = faPen
   postTodoForm: FormGroup
   toggleTodoForm: FormGroup
+  otherUserMail: FormGroup
   selectedOption: string = "1";
 
   constructor(
@@ -33,6 +35,9 @@ export class DashboardComponent implements OnInit{
       title: ['',Validators.required],
       created_by: [localStorage.getItem("pk")]
     })
+    this.otherUserMail = this.fb.group({
+      mail: ['emre@emre.com'],
+    })
     this.toggleTodoForm = this.fb.group({})
   }
   todos: Todos[] = [];
@@ -40,6 +45,7 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit() {
     this.fetchData()
+    this.loginUser()
   }
 
   fetchData(){
@@ -147,4 +153,11 @@ export class DashboardComponent implements OnInit{
     return dateString.includes(searchTerm) || dateString.includes(`T${searchTerm}`);
   }
 
+  otherUserId: string = ""
+  loginUser() {
+    this.httpService.findUserByMail(this.otherUserMail.value).subscribe(
+      (response: User) => {
+        this.otherUserId = response.pk
+    });
+  }
 }

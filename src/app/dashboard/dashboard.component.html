@@ -2,6 +2,20 @@
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
+                <ul class="nav nav-tabs mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">My Todo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Followed Todo</a>
+                    </li>
+                </ul>
+                <div class="row mb-3 px-3">
+                    <label class="col-sm-1 col-form-label">Follow Mail</label>
+                    <input type="text" class="col form-control">
+                    <button class="col-sm-1 ms-3 btn btn-primary">Follow</button>
+                </div>
+
                 <div class="card mb-5" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
                     <div class="card-body py-4 px-4 px-md-5">
 
@@ -13,17 +27,17 @@
                         <div class="pb-2">
                             <div class="card">
                                 <div class="card-body">
-                                        <form class="d-flex flex-row align-items-center" [formGroup]="postTodoForm">
-                                            <input type="text" class="form-control form-control-lg"
-                                                id="exampleFormControlInput1" placeholder="Add new..."
-                                                formControlName="title">
-                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                                                    class="fas fa-calendar-alt fa-lg me-3"></i></a>
-                                            <div>
-                                                <button type="button" class="btn btn-primary"
-                                                    (click)="postNewTodo(postTodoForm)">Add</button>
-                                            </div>
-                                        </form>
+                                    <form class="d-flex flex-row align-items-center" [formGroup]="postTodoForm">
+                                        <input type="text" class="form-control form-control-lg"
+                                            id="exampleFormControlInput1" placeholder="Add new..."
+                                            formControlName="title">
+                                        <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
+                                                class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                                        <div>
+                                            <button type="button" class="btn btn-primary"
+                                                (click)="postNewTodo(postTodoForm)">Add</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +92,7 @@
                             <div class="col-3">
                                 <input [(ngModel)]="searchDateTerm" class="form-control" placeholder="Date Search...">
                             </div>
-                            
+
                         </div>
 
 
@@ -87,12 +101,13 @@
 
 
                         <div *ngFor="let todo of filteredTodos" [formGroup]="toggleTodoForm">
-                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent" [formGroup]="toggleTodoForm">
+                            <ul class="list-group list-group-horizontal rounded-0 bg-transparent"
+                                [formGroup]="toggleTodoForm">
                                 <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
                                     style="background-color: #f4f6f7;">
-                                    
+
                                     <input class="form-check-input me-2" type="checkbox" [checked]="todo.is_deleted"
-                                        aria-label="..." (click)="toggleIsDeleted(todo)"/>
+                                        aria-label="..." (click)="toggleIsDeleted(todo)" />
 
                                     <ng-container *ngIf="todo.is_deleted; else notDeleted">
                                         <s class="lead fw-bold text-secondary" title="Job">{{todo.title}}</s>
@@ -111,10 +126,12 @@
 
                                 <li class="d-flex justify-content-center align-items-center">
                                     <ul class="p-0">
-                                        <fa-icon [icon]="faTrash" class="iconMargin" (click)="deleteTodo(todo.pk)">delete</fa-icon>
+                                        <fa-icon [icon]="faTrash" class="iconMargin"
+                                            (click)="deleteTodo(todo.pk)">delete</fa-icon>
                                     </ul>
                                     <ul class="p-0">
-                                        <fa-icon [icon]="faPen" class="iconMargin" (click)="openEditModal(todo.pk)">edit</fa-icon>
+                                        <fa-icon [icon]="faPen" class="iconMargin"
+                                            (click)="openEditModal(todo.pk)">edit</fa-icon>
 
                                     </ul>
                                 </li>
@@ -126,7 +143,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
 </section>
