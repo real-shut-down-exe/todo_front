@@ -43,7 +43,7 @@ export class HttpService {
   }
 
   sendARequest(data: any){
-    return this.http.post<AddTodo>(this.endpoint+"/connectionRequest/sendARequest/",data)
+    return this.http.post<any>(this.endpoint+"/connectionRequest/sendARequest/",data)
   }
 
   haveAnAcceptConnections(data: any){
@@ -60,5 +60,9 @@ export class HttpService {
   
   updateConnectionRequest(data: any){
     return this.http.post<ConnectionRequest>(this.endpoint+"/connectionRequest/updateConnectionRequest/",data)
+  }
+
+  deleteConnectionRequest(data: any){
+    return this.http.post<ConnectionRequest>(this.endpoint+"/connectionRequest/deleteConnectionRequest/",data)
   }
 }

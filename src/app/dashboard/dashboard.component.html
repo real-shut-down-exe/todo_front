@@ -7,13 +7,9 @@
                 <strong class="me-1">{{con.sender}} </strong> wants to follow your totods
             </div>
             <button class="col-1 btn btn-success"  (click)="updateConnectionRequest(con)">Accept</button>
-            <button class="col-1 btn btn-danger ms-3">Refuse</button>
+            <button class="col-1 btn btn-danger ms-3" (click)="deleteConnectionRequest(con)">Refuse</button>
         </div>
         
-
-
-
-
 
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col">

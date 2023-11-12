@@ -203,4 +203,13 @@ export class DashboardComponent implements OnInit {
       console.log()
     });
   }
+
+  deleteConnectionRequest(data:any){
+    data.receiver = localStorage.getItem("mail")
+    data.is_accepted = true
+
+    this.httpService.deleteConnectionRequest(data).subscribe(response => {
+      console.log()
+    });
+  }
 }
