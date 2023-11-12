@@ -1,27 +1,43 @@
 <section class="vh-100">
     <div class="container py-5 h-100">
+
+
+        <div class="row alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="col d-flex align-items-center">
+                <strong class="me-1">emre@emre.com </strong> he wants to follow your totods
+            </div>
+            <button class="col-1 btn btn-success">Accept</button>
+            <button class="col-1 btn btn-danger ms-3">Refuse</button>
+        </div>
+        
+
+
+
+
+
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col">
                 <ul ngbNav #nav="ngbNav" class="nav nav-tabs mb-3">
                     <li [ngbNavItem]="1">
                         <a class="nav-link" ngbNavLink>My Todo</a>
                         <ng-template ngbNavContent>
-                            
+
 
 
 
                             <div class="card mb-5" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
-                                <div class="card-body py-4 px-4 px-md-5">
-            
+                                <div class="card-body p-4 px-md-5">
+
                                     <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
                                         <i class="fas fa-check-square me-1"></i>
                                         <b>Todossss...</b>
                                     </p>
-            
+
                                     <div class="pb-2">
                                         <div class="card">
                                             <div class="card-body">
-                                                <form class="d-flex flex-row align-items-center" [formGroup]="postTodoForm">
+                                                <form class="d-flex flex-row align-items-center"
+                                                    [formGroup]="postTodoForm">
                                                     <input type="text" class="form-control form-control-lg"
                                                         id="exampleFormControlInput1" placeholder="Add new..."
                                                         formControlName="title">
@@ -35,9 +51,9 @@
                                             </div>
                                         </div>
                                     </div>
-            
+
                                     <hr class="my-4">
-            
+
                                     <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
                                         <p class="small mb-0 me-2 text-muted">Filter</p>
                                         <select class="select" [(ngModel)]="selectedOption" (change)="test($event)">
@@ -50,11 +66,11 @@
                                             <option value="1">Added date</option>
                                             <option value="2">Due date</option>
                                         </select>
-                                        <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i
-                                                class="fas fa-sort-amount-down-alt ms-2"></i></a>
+                                        <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip"
+                                            title="Ascending"><i class="fas fa-sort-amount-down-alt ms-2"></i></a>
                                     </div>
-            
-            
+
+
                                     <!-- eef -->
                                     <div>
                                         <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
@@ -62,62 +78,69 @@
                                                 style="background-color: #f4f6f7;">
                                                 <p class="lead fw-bold mb-0 text-nowrap text-success ">Job</p>
                                             </li>
-            
-            
-                                            <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent ">
+
+
+                                            <li
+                                                class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent ">
                                                 <p href="#!" class="lead fw-bold text-success" title="Created date">
                                                     Created Date
                                                 </p>
                                             </li>
-            
+
                                             <li class="d-flex justify-content-center align-items-center"
                                                 style="margin-right: 4rem;">
-            
+
                                             </li>
-            
+
                                         </ul>
-            
+
                                     </div>
-            
+
                                     <div class="row">
                                         <div class="col-9">
-                                            <input [(ngModel)]="searchJobTerm" class="form-control" placeholder="Job Search...">
+                                            <input [(ngModel)]="searchJobTerm" class="form-control"
+                                                placeholder="Job Search...">
                                         </div>
                                         <div class="col-3">
-                                            <input [(ngModel)]="searchDateTerm" class="form-control" placeholder="Date Search...">
+                                            <input [(ngModel)]="searchDateTerm" class="form-control"
+                                                placeholder="Date Search...">
                                         </div>
-            
+
                                     </div>
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
                                     <div *ngFor="let todo of filteredTodos" [formGroup]="toggleTodoForm">
                                         <ul class="list-group list-group-horizontal rounded-0 bg-transparent"
                                             [formGroup]="toggleTodoForm">
                                             <li class="list-group-item  d-flex align-items-center flex-grow-1 border-0 bg-transparent"
                                                 style="background-color: #f4f6f7;">
-            
-                                                <input class="form-check-input me-2" type="checkbox" [checked]="todo.is_deleted"
-                                                    aria-label="..." (click)="toggleIsDeleted(todo)" />
-            
+
+                                                <input class="form-check-input me-2" type="checkbox"
+                                                    [checked]="todo.is_deleted" aria-label="..."
+                                                    (click)="toggleIsDeleted(todo)" />
+
                                                 <ng-container *ngIf="todo.is_deleted; else notDeleted">
-                                                    <s class="lead fw-bold text-secondary" title="Job">{{todo.title}}</s>
+                                                    <s class="lead fw-bold text-secondary"
+                                                        title="Job">{{todo.title}}</s>
                                                 </ng-container>
                                                 <ng-template #notDeleted>
-                                                    <p class="lead fw-bold text-secondary m-0 w-900px">{{todo.title}}</p>
+                                                    <p class="lead fw-bold text-secondary m-0 w-900px">{{todo.title}}
+                                                    </p>
                                                 </ng-template>
                                             </li>
-            
-            
-                                            <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent ">
+
+
+                                            <li
+                                                class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent ">
                                                 <p href="#!" class="lead fw-bold text-secondary" title="Created date">
                                                     {{todo.created_at| date: 'yyyy-MM-dd HH:mm' }}
                                                 </p>
                                             </li>
-            
+
                                             <li class="d-flex justify-content-center align-items-center">
                                                 <ul class="p-0">
                                                     <fa-icon [icon]="faTrash" class="iconMargin"
@@ -126,15 +149,15 @@
                                                 <ul class="p-0">
                                                     <fa-icon [icon]="faPen" class="iconMargin"
                                                         (click)="openEditModal(todo.pk)">edit</fa-icon>
-            
+
                                                 </ul>
                                             </li>
-            
+
                                         </ul>
-            
+
                                         <hr class="m-0">
                                     </div>
-            
+
                                 </div>
                             </div>
 
@@ -146,25 +169,31 @@
                     <li [ngbNavItem]="2" [ngClass]="{'nav-item': isAccept, 'nav-item d-none': !isAccept}">
                         <a class="nav-link" ngbNavLink href="">Followed Todo</a>
                         <ng-template ngbNavContent>
-                            <p>
-                                Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-                                farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-                                ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                                helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-                                8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                                stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-                            </p>
+                            <div class="p-4 pb-3 mb-4" style="border-radius: .75rem; background-color: #eff1f2;">
+                            
+                                <div class="card mb-3 border-0 shadow-sm">
+                                    <div class="badge alert alert-warning text-dark p-3 text-start mb-0 rounded-0 rounded-top border-0">
+                                        <p class="lead fw-bold d-flex align-items-center mb-0">emre@emre.com</p>
+                                    </div>
+                                    <div class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
+                                        <p class="mb-0 lead fw-bold text-secondary">burası beni todolarım buraya isteğim kadar totodod girebilirikm</p>
+                                    </div>
+                                    <div class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
+                                        <p class="mb-0 lead fw-bold text-secondary">burası beni todolarım buraya isteğim kadar totodod girebilirikm</p>
+                                    </div>
+                                    <div class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
+                                        <p class="mb-0 lead fw-bold text-secondary">burası beni todolarım buraya isteğim kadar totodod girebilirikm</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+
+
+
                         </ng-template>
                     </li>
                 </ul>
-                <!-- <ul class="nav nav-tabs mb-3">
-                    <li class="nav-item">
-                        
-                    </li>
-                    <li [ngClass]="{'nav-item': isAccept, 'nav-item d-none': !isAccept}">
-                        <a class="nav-link" href="">Followed Todo</a>
-                    </li>
-                </ul> -->
                 <div class="row mb-3 px-3" [formGroup]="sendRequestForm">
                     <label class="col-sm-1 col-form-label">Follow Mail</label>
                     <input type="text" class="col form-control" formControlName="sender">
@@ -178,6 +207,6 @@
 
 <div class="position-relative">
     <div class="position-fixed bottom-0 end-0 p-3">
-            <button class="btn btn-danger" (click)="logout()">LogOut</button>
+        <button class="btn btn-danger" (click)="logout()">LogOut</button>
     </div>
 </div>
