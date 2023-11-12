@@ -2,11 +2,11 @@
     <div class="container py-5 h-100">
 
 
-        <div class="row alert alert-warning alert-dismissible fade show" role="alert">
+        <div *ngFor="let con of connectionRequestList" class="row alert alert-warning alert-dismissible fade show" role="alert">
             <div class="col d-flex align-items-center">
-                <strong class="me-1">emre@emre.com </strong> he wants to follow your totods
+                <strong class="me-1">{{con.sender}} </strong> wants to follow your totods
             </div>
-            <button class="col-1 btn btn-success">Accept</button>
+            <button class="col-1 btn btn-success"  (click)="updateConnectionRequest(con)">Accept</button>
             <button class="col-1 btn btn-danger ms-3">Refuse</button>
         </div>
         

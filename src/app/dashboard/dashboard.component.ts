@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Todos, AddTodo, TodoList } from './models/dashboard.model';
+import { Todos, AddTodo, TodoList, ConnectionRequest } from './models/dashboard.model';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -47,15 +47,18 @@ export class DashboardComponent implements OnInit {
     })
     this.isAccept = false;
   }
+
   todos: Todos[] = [];
   orjinalTodoList: Todos[] = [];
   acceptConnectionsTodos: TodoList[] = [];
+  connectionRequestList: ConnectionRequest[] = [];
 
   ngOnInit() {
     if (localStorage.getItem("mail")) {
       this.fetchData()
       this.haveAnAcceptConnections()
       this.fetchAcceptConnectionsTodos()
+      this.connectionRequest()
     }
     else {
       this.router.navigate(['/']);
@@ -178,11 +181,26 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // connectionRequest/fetchAcceptConnectionsTodos/
   fetchAcceptConnectionsTodos() {
     const data = { sender: localStorage.getItem("mail") };
     this.httpService.fetchAcceptConnectionsTodos(data).subscribe(response => {
       this.acceptConnectionsTodos = response
+    });
+  }
+
+  connectionRequest(){
+    const data = { receiver: localStorage.getItem("mail") };
+    this.httpService.connectionRequest(data).subscribe(response => {
+      this.connectionRequestList = response
+    });
+  }
+
+  updateConnectionRequest(data:any){
+    data.receiver = localStorage.getItem("mail")
+    data.is_accepted = true
+
+    this.httpService.updateConnectionRequest(data).subscribe(response => {
+      console.log()
     });
   }
 }

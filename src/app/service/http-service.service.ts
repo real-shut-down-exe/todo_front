@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Todos, AddTodo  } from '../dashboard/models/dashboard.model';
+import { Todos, AddTodo, ConnectionRequest  } from '../dashboard/models/dashboard.model';
 import { User } from '../auth/models/user.model';
 
 @Injectable({
@@ -52,5 +52,13 @@ export class HttpService {
   
   fetchAcceptConnectionsTodos(data: any){
     return this.http.post<any>(this.endpoint+"/connectionRequest/fetchAcceptConnectionsTodos/",data)
+  }
+  
+  connectionRequest(data: any){
+    return this.http.post<any>(this.endpoint+"/connectionRequest/HaveAnyRequest/",data)
+  }
+  
+  updateConnectionRequest(data: any){
+    return this.http.post<ConnectionRequest>(this.endpoint+"/connectionRequest/updateConnectionRequest/",data)
   }
 }

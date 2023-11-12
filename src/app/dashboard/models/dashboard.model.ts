@@ -27,3 +27,12 @@ export interface Todo {
     receiver_id: number;
     todos: Todo[];
   }
+
+
+  export interface ConnectionRequest {
+    sender: string;
+    receiver: string;
+    is_accepted: boolean;
+    created_at: Date;
+  }
+  
