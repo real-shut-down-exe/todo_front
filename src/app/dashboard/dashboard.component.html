@@ -6,8 +6,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">My Todo</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Followed Todo</a>
+                    <li [ngClass]="{'nav-item': isAccept, 'nav-item d-none': !isAccept}">
+                        <a class="nav-link" href="">Followed Todo</a>
                     </li>
                 </ul>
                 <div class="row mb-3 px-3" [formGroup]="sendRequestForm">

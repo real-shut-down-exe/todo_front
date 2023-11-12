@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Todos, AddTodo } from './models/dashboard.model';
-import { faTrash, faPen} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { User } from '../auth/models/user.model';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   endpoint: string = 'http://127.0.0.1:8000/api';
   faTrash = faTrash
   faPen = faPen
@@ -24,16 +24,17 @@ export class DashboardComponent implements OnInit{
   otherUserMail: FormGroup
   sendRequestForm: FormGroup
   selectedOption: string = "1";
+  isAccept: boolean = false;
 
   constructor(
-    private httpService: HttpService, 
+    private httpService: HttpService,
     private router: Router,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private modalService: NgbModal
-    ) {
+  ) {
     this.postTodoForm = this.fb.group({
-      title: ['',Validators.required],
+      title: ['', Validators.required],
       created_by: [localStorage.getItem("pk")]
     })
     this.otherUserMail = this.fb.group({
@@ -41,9 +42,10 @@ export class DashboardComponent implements OnInit{
     })
     this.toggleTodoForm = this.fb.group({})
     this.sendRequestForm = this.fb.group({
-      sender: ['',Validators.required],
+      sender: ['', Validators.required],
       receiver: [localStorage.getItem("mail")]
     })
+    this.isAccept = false;
   }
   todos: Todos[] = [];
   orjinalTodoList: Todos[] = [];
@@ -51,18 +53,19 @@ export class DashboardComponent implements OnInit{
   ngOnInit() {
     if (localStorage.getItem("mail")) {
       this.fetchData()
+      this.haveAnAcceptConnections()
     }
-    else{
+    else {
       this.router.navigate(['/']);
     }
   }
 
-  fetchData(){
+  fetchData() {
     const created_by = localStorage.getItem("pk")
     const id = created_by ? parseInt(created_by, 10) : 0;
     console.log()
     this.httpService.getAllTodosById(id).subscribe(
-      data =>{
+      data => {
         this.todos = data;
         this.orjinalTodoList = data;
       });
@@ -80,37 +83,37 @@ export class DashboardComponent implements OnInit{
     todo.is_deleted = !todo.is_deleted;
     todo.created_by = created_by
 
-    this.httpService.put(toggleData.pk,todo).subscribe(i=>{
+    this.httpService.put(toggleData.pk, todo).subscribe(i => {
     })
   }
-  
-  test(event: Event){
+
+  test(event: Event) {
     console.log(this.selectedOption)
-    if(this.selectedOption === '1'){
+    if (this.selectedOption === '1') {
       this.fetchData();
       this.todos = this.orjinalTodoList;
     }
-    if(this.selectedOption === '2'){
+    if (this.selectedOption === '2') {
       this.todos = this.orjinalTodoList;
       this.todos = this.todos.filter(todo => todo.is_deleted);
     }
-    if(this.selectedOption === '3'){
+    if (this.selectedOption === '3') {
       this.todos = this.orjinalTodoList;
       this.todos = this.todos.filter(todo => !todo.is_deleted);
     }
   }
 
-  deleteTodo(id: any){
-    return this.httpService.delete(id).subscribe(()=>{
+  deleteTodo(id: any) {
+    return this.httpService.delete(id).subscribe(() => {
       // this.todos = this.todos.filter((u: any) => u !== id);
       this.fetchData();
     });
   }
 
-  postNewTodo(data: any){
-    return this.httpService.post(this.postTodoForm.value).subscribe( data =>{
+  postNewTodo(data: any) {
+    return this.httpService.post(this.postTodoForm.value).subscribe(data => {
       this.fetchData();
-      })
+    })
   }
 
   // getActivatedTodoId(){
@@ -120,7 +123,7 @@ export class DashboardComponent implements OnInit{
   //   })
   // }
 
-  openEditModal(id: number){
+  openEditModal(id: number) {
     const modalRef = this.modalService.open(EditModalComponent, {
       size: 'lg', // Size and other options can be set here as well
       centered: true,
@@ -134,7 +137,7 @@ export class DashboardComponent implements OnInit{
       error: (reason) => {
         console.log('Modal dismissed with reason:', reason);
       }
-    });    
+    });
   }
   searchJobTerm: string = '';
   searchDateTerm: string = '';
@@ -145,7 +148,7 @@ export class DashboardComponent implements OnInit{
       (this.searchDateTerm ? this.isValidDateTime(todo.created_at, this.searchDateTerm) : true)
     );
   }
-  
+
   isValidDateTime(date: any, searchTerm: string): boolean {
 
     date = new Date(date).toLocaleString('tr', {
@@ -157,19 +160,26 @@ export class DashboardComponent implements OnInit{
     });
 
     (date.toLowerCase().includes(this.searchDateTerm.toLowerCase()) || !this.searchJobTerm)
-  
+
     const dateString = date
     return dateString.includes(searchTerm) || dateString.includes(`T${searchTerm}`);
   }
 
-  sendRequest(data: any){
-    return this.httpService.sendARequest(this.sendRequestForm.value).subscribe( data =>{
-        console.log(data)
-      })
+  sendRequest(data: any) {
+    return this.httpService.sendARequest(this.sendRequestForm.value).subscribe(data => {
+      console.log(data)
+    })
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
     this.router.navigate(['/']);
+  }
+
+  haveAnAcceptConnections() {
+    const data = { sender: localStorage.getItem("mail") };
+    this.httpService.haveAnAcceptConnections(data).subscribe(response => {
+      this.isAccept = response;
+    });
   }
 }

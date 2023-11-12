@@ -45,4 +45,8 @@ export class HttpService {
   sendARequest(data: any){
     return this.http.post<AddTodo>(this.endpoint+"/connectionRequest/sendARequest/",data)
   }
+
+  haveAnAcceptConnections(data: any){
+    return this.http.post<boolean>(this.endpoint+"/connectionRequest/HaveAnAcceptConnections/",data)
+  }
 }
