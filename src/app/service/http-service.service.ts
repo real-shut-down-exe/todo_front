@@ -20,7 +20,7 @@ export class HttpService {
   // Genel HTTP POST isteği
   post(data: any){
     const a = (this.endpoint+"/todo/",data)
-    return this.http.post<AddTodo>(this.endpoint+"/todo/",data)
+    return this.http.post<any>(this.endpoint+"/todo/",data)
   }
 
   // Genel HTTP PUT isteği
@@ -48,5 +48,9 @@ export class HttpService {
 
   haveAnAcceptConnections(data: any){
     return this.http.post<boolean>(this.endpoint+"/connectionRequest/HaveAnAcceptConnections/",data)
+  }
+  
+  fetchAcceptConnectionsTodos(data: any){
+    return this.http.post<any>(this.endpoint+"/connectionRequest/fetchAcceptConnectionsTodos/",data)
   }
 }

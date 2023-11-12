@@ -14,3 +14,16 @@ export interface AddTodo{
     is_deleted: boolean
     created_by: string
 }
+
+export interface Todo {
+    title: string;
+    created_by: number;
+    created_at: string;
+    is_deleted: boolean;
+  }
+  
+  export interface TodoList {
+    receiver: string;
+    receiver_id: number;
+    todos: Todo[];
+  }

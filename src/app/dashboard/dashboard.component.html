@@ -171,18 +171,22 @@
                         <ng-template ngbNavContent>
                             <div class="p-4 pb-3 mb-4" style="border-radius: .75rem; background-color: #eff1f2;">
                             
-                                <div class="card mb-3 border-0 shadow-sm">
+                                <div *ngFor="let todo of acceptConnectionsTodos" class="card mb-3 border-0 shadow-sm">
+                                    
                                     <div class="badge alert alert-warning text-dark p-3 text-start mb-0 rounded-0 rounded-top border-0">
-                                        <p class="lead fw-bold d-flex align-items-center mb-0">emre@emre.com</p>
+                                        <p class="lead fw-bold d-flex align-items-center mb-0">{{todo.receiver}}</p>
                                     </div>
-                                    <div class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
-                                        <p class="mb-0 lead fw-bold text-secondary">burası beni todolarım buraya isteğim kadar totodod girebilirikm</p>
-                                    </div>
-                                    <div class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
-                                        <p class="mb-0 lead fw-bold text-secondary">burası beni todolarım buraya isteğim kadar totodod girebilirikm</p>
-                                    </div>
-                                    <div class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
-                                        <p class="mb-0 lead fw-bold text-secondary">burası beni todolarım buraya isteğim kadar totodod girebilirikm</p>
+                                    <div *ngFor="let t of todo.todos" class="border-start border-warning border-3 p-2 mt-2 d-flex align-items-center">
+                                        
+                                        <ng-container *ngIf="t.is_deleted; else notDeleted">
+                                            <s class="lead fw-bold text-success"
+                                                title="Job">{{t.title}}</s>
+                                        </ng-container>
+                                        <ng-template #notDeleted>
+                                            <p class="lead fw-bold text-secondary m-0 w-900px">{{t.title}}
+                                            </p>
+                                        </ng-template>
+
                                     </div>
                                 </div>
                             </div>
