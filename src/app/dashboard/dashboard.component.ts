@@ -49,7 +49,12 @@ export class DashboardComponent implements OnInit{
   orjinalTodoList: Todos[] = [];
 
   ngOnInit() {
-    this.fetchData()
+    if (localStorage.getItem("mail")) {
+      this.fetchData()
+    }
+    else{
+      this.router.navigate(['/']);
+    }
   }
 
   fetchData(){
@@ -161,5 +166,10 @@ export class DashboardComponent implements OnInit{
     return this.httpService.sendARequest(this.sendRequestForm.value).subscribe( data =>{
         console.log(data)
       })
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 }

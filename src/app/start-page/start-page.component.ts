@@ -16,4 +16,10 @@ export class StartPageComponent {
   navigateToSignup() {
     this.router.navigate(['signup']);
   }
+
+  ngOnInit() {
+    if (localStorage.getItem("mail")) {
+      this.router.navigate(['dashboard']);
+    }
+  }  
 }
