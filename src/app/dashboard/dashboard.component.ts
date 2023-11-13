@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit {
   isLoading: boolean = false;
   isError: boolean = false;
   errorMesage = ""; 
+  isSuccess: boolean = false;
+  
 
   constructor(
     private httpService: HttpService,
@@ -125,6 +127,8 @@ export class DashboardComponent implements OnInit {
 
   postNewTodo(data: any) {
     return this.httpService.post(this.postTodoForm.value).subscribe(data => {
+      this.isSuccess = true;
+      this.sn1();
       this.fetchData();
     })
   }
@@ -175,7 +179,9 @@ export class DashboardComponent implements OnInit {
     this.isLoading = true
     return this.httpService.sendARequest(this.sendRequestForm.value).subscribe(data => {
       this.isLoading = false
+      this.isSuccess = true
       this.sn3()
+      this.sn1()
     },
     error => {
       this.isLoading = false
@@ -193,6 +199,15 @@ export class DashboardComponent implements OnInit {
         this.isLoading = false
         resolve('Operation completed successfully');
       }, 2500); // 2.5 seconds
+    });
+  }
+
+  sn1(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.isSuccess = false
+        resolve('Operation completed successfully');
+      }, 1000); // 1 seconds
     });
   }
 

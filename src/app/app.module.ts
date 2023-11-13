@@ -15,6 +15,7 @@ import { EditModalComponent } from './dashboard/components/edit-modal/edit-modal
 import { OtherTodosComponent } from './dashboard/components/other-todos/other-todos.component';
 import { LoaderComponent } from './dashboard/loader/loader/loader.component';
 import { ErrorMesageComponent } from './dashboard/components/error-mesage/error-mesage.component';
+import { SuccessCheckmarkComponent } from './dashboard/components/success-checkmark/success-checkmark.component';
 
 export function appConfigInit(configService: ConfigService) {
   return () => { return configService.load() }
@@ -29,6 +30,7 @@ export function appConfigInit(configService: ConfigService) {
     OtherTodosComponent,
     LoaderComponent,
     ErrorMesageComponent,
+    SuccessCheckmarkComponent,
   ],
   imports: [
     AuthModule,
