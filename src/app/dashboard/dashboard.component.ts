@@ -25,6 +25,10 @@ export class DashboardComponent implements OnInit {
   sendRequestForm: FormGroup
   selectedOption: string = "1";
   isAccept: boolean = false;
+  myMail = localStorage.getItem("mail")
+  isLoading: boolean = false;
+  isError: boolean = false;
+  errorMesage = ""; 
 
   constructor(
     private httpService: HttpService,
@@ -55,10 +59,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem("mail")) {
+      this.isLoading = true
       this.fetchData()
       this.haveAnAcceptConnections()
       this.fetchAcceptConnectionsTodos()
       this.connectionRequest()
+      this.isLoading = false
     }
     else {
       this.router.navigate(['/']);
@@ -66,6 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchData() {
+    this.isLoading = true
     const created_by = localStorage.getItem("pk")
     const id = created_by ? parseInt(created_by, 10) : 0;
     console.log()
@@ -74,6 +81,7 @@ export class DashboardComponent implements OnInit {
         this.todos = data;
         this.orjinalTodoList = data;
       });
+      this.isLoading = false
   }
 
   toggle = {
@@ -164,9 +172,28 @@ export class DashboardComponent implements OnInit {
   }
 
   sendRequest(data: any) {
+    this.isLoading = true
     return this.httpService.sendARequest(this.sendRequestForm.value).subscribe(data => {
-      console.log(data)
+      this.isLoading = false
+      this.sn3()
+    },
+    error => {
+      this.isLoading = false
+      this.errorMesage = error.error.error
+      this.isError = true
+      this.sn3()
     })
+  }
+
+  sn3(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.errorMesage = ""
+        this.isError = false
+        this.isLoading = false
+        resolve('Operation completed successfully');
+      }, 2500); // 2.5 seconds
+    });
   }
 
   logout() {

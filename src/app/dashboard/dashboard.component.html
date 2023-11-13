@@ -207,6 +207,13 @@
 
 <div class="position-relative">
     <div class="position-fixed bottom-0 end-0 p-3">
-        <button class="btn btn-danger" (click)="logout()">LogOut</button>
+        <div class="d-flex justify-content-end pe-2">
+            <button class="d-inline btn btn-danger " (click)="logout()">LogOut</button>
+        </div>
+        <p class="d-inline pe-2 mb-0 bottom-0 end-0 d-flex justify-content-end align-items-end small">{{myMail}}</p>
     </div>
 </div>
+
+
+<app-loader [isLoading]="isLoading"></app-loader>
+<app-error-mesage [isError]="isError" [errorMesage]="errorMesage"></app-error-mesage>

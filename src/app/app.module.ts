@@ -13,6 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditModalComponent } from './dashboard/components/edit-modal/edit-modal.component';
 import { OtherTodosComponent } from './dashboard/components/other-todos/other-todos.component';
+import { LoaderComponent } from './dashboard/loader/loader/loader.component';
+import { ErrorMesageComponent } from './dashboard/components/error-mesage/error-mesage.component';
 
 export function appConfigInit(configService: ConfigService) {
   return () => { return configService.load() }
@@ -25,6 +27,8 @@ export function appConfigInit(configService: ConfigService) {
     DashboardComponent,
     EditModalComponent,
     OtherTodosComponent,
+    LoaderComponent,
+    ErrorMesageComponent,
   ],
   imports: [
     AuthModule,
