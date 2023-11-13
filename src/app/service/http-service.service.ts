@@ -65,4 +65,12 @@ export class HttpService {
   deleteConnectionRequest(data: any){
     return this.http.post<ConnectionRequest>(this.endpoint+"/connectionRequest/deleteConnectionRequest/",data)
   }
+
+  ascTodo(){
+    return this.http.post<any>(this.endpoint+"/todo/AscTodo/","")
+  }
+
+  descTodo(){
+    return this.http.post<any>(this.endpoint+"/todo/DescTodo/","")
+  }
 }

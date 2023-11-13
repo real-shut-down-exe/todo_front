@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   otherUserMail: FormGroup
   sendRequestForm: FormGroup
   selectedOption: string = "1";
+  OrderOption: string = "1";
   isAccept: boolean = false;
   myMail = localStorage.getItem("mail")
   isLoading: boolean = false;
@@ -102,11 +103,10 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  test(event: Event) {
+  oreder(event: Event) {
     console.log(this.selectedOption)
     if (this.selectedOption === '1') {
       this.fetchData();
-      this.todos = this.orjinalTodoList;
     }
     if (this.selectedOption === '2') {
       this.todos = this.orjinalTodoList;
@@ -253,5 +253,34 @@ export class DashboardComponent implements OnInit {
     this.httpService.deleteConnectionRequest(data).subscribe(response => {
       console.log()
     });
+  }
+
+  AscTodo(){
+    this.httpService.ascTodo().subscribe(response => {
+      this.todos = response
+      this.orjinalTodoList =response
+      console.log()
+    });
+  }
+
+  DescTodo(){
+    this.httpService.descTodo().subscribe(response => {
+      this.todos = response
+      this.orjinalTodoList =response
+      console.log()
+    });
+  }
+
+  ascDesc(event: Event) {
+    console.log(this.OrderOption)
+    if (this.OrderOption === '0') {
+      this.fetchData()
+    }
+    if (this.OrderOption === '1') {
+      this.AscTodo()
+    }
+    if (this.OrderOption === '2') {
+      this.DescTodo()
+    }
   }
 }
