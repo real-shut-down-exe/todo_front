@@ -1,4 +1,4 @@
-<section class="vh-100">
+<section class="vh-100 gradient-background">
     <div class="container py-5 h-100">
 
 
@@ -15,7 +15,7 @@
             <div class="col">
                 <ul ngbNav #nav="ngbNav" class="nav nav-tabs mb-3">
                     <li [ngbNavItem]="1">
-                        <a class="nav-link" ngbNavLink>My Todo</a>
+                        <a class="nav-link bg-transparent" ngbNavLink>My Todo</a>
                         <ng-template ngbNavContent>
 
 
@@ -163,7 +163,7 @@
                         </ng-template>
                     </li>
                     <li [ngbNavItem]="2" [ngClass]="{'nav-item': isAccept, 'nav-item d-none': !isAccept}">
-                        <a class="nav-link" ngbNavLink href="">Followed Todo</a>
+                        <a class="nav-link bg-transparent" ngbNavLink href="">Followed Todo</a>
                         <ng-template ngbNavContent>
                             <div class="p-4 pb-3 mb-4" style="border-radius: .75rem; background-color: #eff1f2;">
                             
@@ -213,8 +213,6 @@
         <p class="d-inline pe-2 mb-0 bottom-0 end-0 d-flex justify-content-end align-items-end small">{{myMail}}</p>
     </div>
 </div>
-
-<button (click)="AscTodo()"></button>
 
 <app-loader [isLoading]="isLoading"></app-loader>
 <app-error-mesage [isError]="isError" [errorMesage]="errorMesage"></app-error-mesage>

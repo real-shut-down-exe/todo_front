@@ -36,3 +36,7 @@
     display: none !important;
   }
 }
+
+.gradient-background {
+  background: linear-gradient(to right, #ff58334e, #33a2fd42);
+}
